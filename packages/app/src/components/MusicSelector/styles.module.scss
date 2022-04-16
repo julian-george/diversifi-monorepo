@@ -1,11 +1,10 @@
 @import "../../global.module.scss";
 
-.authContainer {
+.selectorContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
-.authTitle {
+
+.selectorTitle {
   @extend .sectionTitle;
 }
