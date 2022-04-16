@@ -1,22 +1,18 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./styles.module.scss";
 import SpotifyAuth from "./SpotifyAuth";
-import {
-  BrowserRouter as Router, Route, Routes,
-} from 'react-router-dom';
-import Globe from './Globe';
+import MusicSelector from "./MusicSelector";
 
 const App: React.FC = () => {
+  // When the URL changes, returns the auth code URL param if it exists
+  const spotifyAuthCode = useMemo(
+    () => new URLSearchParams(window.location.search)?.get("code") || null,
+    [window.location.search]
+  );
   return (
-    <div>
-        <Router>
-          <div id="post-block">
-            <Routes>
-              <Route path="/" element={<Globe />} />
-              <Route path="/home" element={<SpotifyAuth />} />
-            </Routes>
-          </div>
-        </Router>
+    <div className={styles.appContent}>
+      <SpotifyAuth authCode={spotifyAuthCode} />
+      <MusicSelector />
     </div>
   );
 };
