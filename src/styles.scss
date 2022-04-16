@@ -1,0 +1,19 @@
+// @font-face {
+//   font-family: "Quatrrocento";
+//   src: url("./fonts/Quattrocento-Regular.ttf") format("ttf");
+//   font-weight: 400;
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: "Quattrocento";
+//   src: url("./fonts/Quattrocento-Bold.ttf") format("ttf");
+//   font-weight: 700;
+//   font-style: normal;
+// }
+
+/* TODO: figure out local font loading */
+@import url("https://fonts.googleapis.com/css2?family=Gudea:ital,wght@0,400;0,700;1,400&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+body {
+  margin: 0;
+}

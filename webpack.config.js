@@ -52,16 +52,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              useRelativePath: true,
-              name: "[name].[ext]",
-            },
-          },
-        ],
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
       },
       {
         test: /\.(ts|js)?$/,
@@ -110,5 +102,8 @@ module.exports = {
     static: "./src",
     historyApiFallback: true,
     port: 3000,
+    client: {
+      overlay: false,
+    },
   },
 };

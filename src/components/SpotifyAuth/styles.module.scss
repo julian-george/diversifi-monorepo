@@ -1,0 +1,7 @@
+@import "../../global.module.scss";
+
+.authContainer {
+}
+.authTitle {
+  @extend .sectionTitle;
+}
