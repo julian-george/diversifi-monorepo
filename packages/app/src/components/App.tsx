@@ -4,9 +4,10 @@ import SpotifyAuth from "./SpotifyAuth";
 import MusicSelector from "./MusicSelector";
 
 const App: React.FC = () => {
+  // When the URL changes, returns the auth code URL param if it exists
   const spotifyAuthCode = useMemo(
     () => new URLSearchParams(window.location.search)?.get("code") || null,
-    []
+    [window.location.search]
   );
   return (
     <div className={styles.appContent}>

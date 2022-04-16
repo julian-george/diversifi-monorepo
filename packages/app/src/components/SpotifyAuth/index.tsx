@@ -4,6 +4,9 @@ import styles from "./styles.module.scss";
 import { SERVER_URL } from "../../constants";
 
 interface SpotifyAuthProps {
+  /**
+   * The authcode provided in the URL when Spotify redirects to our site, or null if there is no such code
+   */
   authCode: string | null;
 }
 
@@ -11,12 +14,14 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
   const [accessToken, setAccessToken] = useState<string | null>(
     localStorage.getItem("spotify-access-token")
   );
+
+  // Removes the access token from local storage to allow a different accout to be linked
   const unlinkAccount = useCallback(() => {
-    localStorage.removeItem("spotify-access-token");
     setAccessToken(null);
   }, [accessToken]);
-  const authRedirect = useCallback(() => {
-    // TODO: change to GET and remove href stuff once deployed
+
+  // Redirects the user to Spotify's login URL in order to get an authentication code
+  const getAuthCode = useCallback(() => {
     axios
       .post(SERVER_URL + "/auth/code")
       .then((response) => {
@@ -27,20 +32,29 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
         console.error("Error when authenticating", err);
       });
   }, []);
+
+  // Syncs the React state with the local storage, since React doesn't rerender components when localStorage changes
+  useEffect(() => {
+    if (accessToken) localStorage.setItem("spotify-access-token", accessToken);
+    else localStorage.removeItem("spotify-access-token");
+  }, [accessToken]);
+
+  // Takes the auth code provided when Spotify redirects back, and uses that to fetch an access token to be stored in localStorage
   useEffect(() => {
     if (authCode)
       axios
         .post(SERVER_URL + "/auth/token", { code: authCode })
         .then((response: any) => {
           const { accessToken, redirectUrl } = response.data;
-          if (accessToken)
-            localStorage.setItem("spotify-access-token", accessToken);
-          if (redirectUrl) window.location.href = "/";
+          if (accessToken) setAccessToken(accessToken);
+          if (redirectUrl) window.location.href = redirectUrl;
         })
         .catch((err) => {
           console.error("Error when authenticating", err);
+          window.location.href = "/";
         });
   }, [authCode]);
+
   return (
     <div className={styles.authContainer}>
       <div className={styles.authTitle}>First, link your Spotify account</div>
@@ -50,7 +64,7 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
           <div onClick={unlinkAccount}>Use a different account</div>
         </>
       ) : (
-        <button onClick={authRedirect}>Link Your Account</button>
+        <button onClick={getAuthCode}>Link Your Account</button>
       )}
     </div>
   );

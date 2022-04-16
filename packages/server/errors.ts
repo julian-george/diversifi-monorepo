@@ -1,4 +1,10 @@
-export const SERVER_ERROR = () => ({
+export const SERVER_ERROR = (message: string) => ({
   code: 500,
-  message: `An unknown server error occurred, please contact a website owner.`,
+  message:
+    message ||
+    `An unknown server error occurred, please contact a website owner.`,
+});
+export const BAD_REQUEST = (message: string) => ({
+  code: 400,
+  message,
 });
