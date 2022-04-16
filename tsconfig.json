@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "sourceMap": true,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "module": "es6",
-    "moduleResolution": "node",
-    "target": "es5",
-    "allowJs": true,
+    "lib": ["esnext", "dom"],
+    "target": "es6",
+    "module": "commonjs",
     "jsx": "react",
-    "allowSyntheticDefaultImports": true
+
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
-  "include": ["./src/**/*"]
+  "include": ["packages/**/*.ts", "packages/**/*.tsx"]
 }
