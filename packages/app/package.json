@@ -10,8 +10,14 @@
     "dev": "webpack serve --mode development"
   },
   "dependencies": {
+    "@react-three/drei": "^9.4.2",
+    "@react-three/fiber": "^8.0.11",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "styled-components": "^5.3.5",
+    "three": "^0.139.2",
+    "tree": "^0.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
