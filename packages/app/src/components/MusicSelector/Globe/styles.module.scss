@@ -1,0 +1,11 @@
+.earthProject {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+canvas {
+  width: 1000px;
+  height: 800px;
+  display: block;
+}
