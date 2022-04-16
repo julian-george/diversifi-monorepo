@@ -14,6 +14,6 @@ app.listen({ port: process.env.PORT }, () => {
   console.log(`Server listening on port ${process.env.PORT}`);
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use("/auth", authRouter);
