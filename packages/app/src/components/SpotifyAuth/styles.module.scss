@@ -19,7 +19,7 @@
   gap: 6px;
 }
 .unlinkButton {
-  @extend .interactable;
+  @extend .interactableText;
   text-align: center;
   font-size: 16px;
   font-weight: 400;

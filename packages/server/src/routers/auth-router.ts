@@ -20,7 +20,7 @@ const AUTH_REDIRECT_URL =
       `?client_id=${CLIENT_ID}` +
       "&response_type=code" +
       `&redirect_uri=${encodeURI(SITE_REDIRECT_URL)}` +
-      "&scope=user-top-read" +
+      "&scope=user-top-read user-read-private user-read-email playlist-modify-public playlist-modify-private" +
       "&show_dialog=true"
     : null;
 

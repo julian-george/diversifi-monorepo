@@ -9,19 +9,10 @@
   @extend .sectionTitle;
 }
 
-
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-
-* {
-	box-sizing: border-box;
-}
-
 .countrySelection {
-	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
-	display: flex;
-	align-items: center;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  
 }

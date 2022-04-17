@@ -32,6 +32,6 @@ $spotify-green: #1db954;
 }
 
 .buttonText {
-  @extend .interactable;
+  @extend .interactableText;
   color: white;
 }
