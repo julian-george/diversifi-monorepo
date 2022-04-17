@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const dotenv = require("dotenv");
 dotenv.config();
 const env = process.env.NODE_ENV || "development";
@@ -84,6 +83,9 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
+      template: "./index.html",
+      inject: "body",
+      alwaysWriteToDisk: true,
       favicon: "./src/assets/favicon.png",
     }),
     new webpack.DefinePlugin({
