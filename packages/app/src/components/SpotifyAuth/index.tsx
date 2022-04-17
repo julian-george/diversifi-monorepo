@@ -19,7 +19,7 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
   // Removes the access token from local storage to allow a different accout to be linked
   const unlinkAccount = useCallback(() => {
     setAccessToken(null);
-  }, [accessToken]);
+  }, [setAccessToken]);
 
   // Redirects the user to Spotify's login URL in order to get an authentication code
   const getAuthCode = useCallback(() => {
@@ -45,7 +45,7 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
     if (authCode)
       axios
         .post(SERVER_URL + "/auth/token", { code: authCode })
-        .then((response: any) => {
+        .then((response) => {
           const { accessToken, redirectUrl } = response.data;
           if (accessToken) setAccessToken(accessToken);
           if (redirectUrl) window.location.href = redirectUrl;
