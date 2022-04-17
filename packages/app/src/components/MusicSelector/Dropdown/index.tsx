@@ -16,9 +16,10 @@ export interface Props {
 
 interface DropdownProps {
   setCountry: React.Dispatch<React.SetStateAction<string | null>>;
+  accessToken: string | null;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ setCountry }) => {
+const Dropdown: React.FC<DropdownProps> = ({ setCountry, accessToken }) => {
   const [trigger, setTrigger] = useState<boolean>(false);
   const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -28,13 +29,12 @@ const Dropdown: React.FC<DropdownProps> = ({ setCountry }) => {
   );
 
   const submitCountry = useCallback(() => {
-    if (!localStorage.hasItem("spotify-access-token"))
-      alert("You must sign in first!");
+    if (!accessToken) alert("You must sign in first!");
     else if (selectRef?.current) {
       setCountry(selectRef.current.value);
       setTrigger(true);
     }
-  }, [selectRef, setCountry, setTrigger]);
+  }, [selectRef, setCountry, setTrigger, accessToken]);
 
   return (
     <>

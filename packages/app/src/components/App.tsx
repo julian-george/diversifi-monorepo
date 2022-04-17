@@ -57,7 +57,11 @@ const App: React.FC = () => {
       />
       {/* </Slide> */}
       {/* <Slide className={styles.slide2}> */}
-      <MusicSelector country={country} setCountry={setCountry} />
+      <MusicSelector
+        country={country}
+        setCountry={setCountry}
+        accessToken={accessToken}
+      />
       <Playlist playlistId={playlistId} loading={playlistLoading} />
       {/* </Slide>
       </FullPage> */}
