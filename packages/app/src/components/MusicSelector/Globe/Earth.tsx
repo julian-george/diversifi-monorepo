@@ -8,7 +8,7 @@ import EarthDayMap from "../../../assets/textures/8k_earth-daymap.png";
 import EarthNormalMap from "../../../assets/textures/8k_earth_normal_map.png";
 import EarthSpecularMap from "../../../assets/textures/8k_earth_specular_map.png";
 import EarthCloudsMap from "../../../assets/textures/8k_earth_clouds.png";
-import EarthBordersMap from "../../../assets/textures/8k_earth_borders_map.png";
+import EarthBordersMap from "../../../assets/textures/demo.png";
 
 export function Earth() {
   const [colorMap, normalMap, specularMap, cloudsMap, bordersMap] = useLoader(
@@ -22,6 +22,7 @@ export function Earth() {
     ]
   );
 
+  // EarthBordersMap.offset(10);
   const earthRef = useRef<Mesh>(null);
   const cloudsRef = useRef<Mesh>(null);
   const bordersRef = useRef<Mesh>(null);
@@ -61,21 +62,21 @@ export function Earth() {
           normalMap={normalMap}
           // borderMap={bordersMap}
         />
-        {/* <OrbitControls 
+        <OrbitControls 
             enableZoom={true} 
             enablePan={true} 
             enableRotate={false} 
             zoomSpeed={0.6} 
             panSpeed={0.5} 
             rotateSpeed={0.4}
-        /> */}
+        />
       </mesh>
       <mesh ref={bordersRef} position={[0, 0, 3]}>
-        <sphereGeometry args={[1.1, 50, 50]} />
+        <sphereGeometry args={[1.005, 50, 50]} />
         <meshPhongMaterial
           map={bordersMap}
-          opacity={0.1}
-          depthWrite={true}
+          opacity={1}
+          depthWrite={false}
           transparent={true}
           side={DoubleSide}
         />
