@@ -26,7 +26,6 @@ countryRouter.get("/:name", async (req, res) => {
     // Get name and Auth token from user
     const countryName = req.params.name;
     const authToken = req.header("Authorization");
-    console.log(authToken);
 
     // Get top tracks (array of song IDs)
     const topTracks = await getTopUserTracks(authToken);
@@ -36,7 +35,6 @@ countryRouter.get("/:name", async (req, res) => {
     }
 
     // Gets audio features for <= 100 tracks from user
-    console.log("top", topTracks.data);
     let audioFeaturesRes = await getTracksAudioFeatures(
       authToken,
       topTracks.data

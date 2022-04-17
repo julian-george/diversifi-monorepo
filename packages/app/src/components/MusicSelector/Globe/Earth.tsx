@@ -78,8 +78,6 @@ const Earth: React.FC<EarthProps> = ({ country }) => {
         earth.rotation.y += 0.0005;
       }
       clouds.rotation.y += 0.001;
-      // console.log("x", round(xRotation, 2), round(xDesired || 0, 2), xStep);
-      // console.log("y", round(yRotation, 2), round(yDesired || 0, 2), yStep);
     }
   });
 
@@ -112,7 +110,6 @@ const Earth: React.FC<EarthProps> = ({ country }) => {
   );
 
   useEffect(() => {
-    console.log(country);
     if (country) viewCountry(country as Country);
   }, [country, viewCountry]);
 

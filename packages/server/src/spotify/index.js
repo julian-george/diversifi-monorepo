@@ -157,7 +157,6 @@ const getTracksAudioFeatures = async (
   trackIDs,
   retries = 0
 ) => {
-  console.log("in", trackIDs);
   const api_url = `https://api.spotify.com/v1/audio-features?ids=${trackIDs.join(
     ","
   )}`;
@@ -227,7 +226,6 @@ const getUserId = async (userAccessToken, retries = 0) => {
       data: response.data.id,
     };
   } catch (error) {
-    console.log(error.response, userAccessToken);
     return await onRateLimit(
       error.response,
       () => {
@@ -294,7 +292,6 @@ const addSongsToPlaylist = async (
     Authorization: userAccessToken,
   };
   const songUris = songList.map((id) => `spotify:track:${id}`).join(",");
-  console.log(songUris);
   const api_url = `https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${songUris}`;
 
   try {
@@ -310,8 +307,6 @@ const addSongsToPlaylist = async (
       data: true,
     };
   } catch (error) {
-    console.log(playlistID, songUris, songList);
-    console.log(error.response.data);
     return await onRateLimit(
       error.response,
       () => {

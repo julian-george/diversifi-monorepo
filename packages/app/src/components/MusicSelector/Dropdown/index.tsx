@@ -7,13 +7,6 @@ export interface Props {
   children?: React.ReactChild | React.ReactChild[];
 }
 
-// let selection = document.querySelector('select');
-// let result = document.querySelector('h2');
-// selection?.addEventListener('change', ()=>{
-//     result.innerText = selection.options[selection?.selectedIndex].text;
-//     console.log(result?.innerText);
-// })
-
 interface DropdownProps {
   setCountry: React.Dispatch<React.SetStateAction<string | null>>;
   accessToken: string | null;
