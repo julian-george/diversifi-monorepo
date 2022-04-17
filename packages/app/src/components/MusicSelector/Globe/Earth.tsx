@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import THREE, { TextureLoader, Mesh, DoubleSide } from "three";
+// import { OrbitControls } from "@react-three/drei";
+import { TextureLoader, Mesh, DoubleSide } from "three";
 
 import EarthDayMap from "../../../assets/textures/8k_earth-daymap.png";
 // import EarthDayMap2 from "../../../assets/textures/8k_earth-daymap2.png";
@@ -62,14 +62,14 @@ export function Earth() {
           normalMap={normalMap}
           // borderMap={bordersMap}
         />
-        <OrbitControls 
+        {/* <OrbitControls 
             enableZoom={true} 
             enablePan={true} 
             enableRotate={false} 
             zoomSpeed={0.6} 
             panSpeed={0.5} 
             rotateSpeed={0.4}
-        />
+        /> */}
       </mesh>
       <mesh ref={bordersRef} position={[0, 0, 3]}>
         <sphereGeometry args={[1.005, 50, 50]} />

@@ -1,0 +1,75 @@
+.dropdownParent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.comboBox{
+    display: inline-block;
+	text-transform: uppercase;
+    text-decoration: none;
+	letter-spacing: 5px;
+	color: #FAFAFA;
+	border: 3px solid #204e05;
+    padding: 25px;
+    
+	text-align: center;
+	left: 50%;
+	top: 50%;
+    background: #1DB954;
+    border-radius: 10px;
+
+    border-radius: 8px;
+    padding: 12px 24px 12px 20px;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+		background: rgba(51, 83, 76, 0.6);
+    }
+}
+
+.progressComponent{
+    margin-top: 20px;
+    font-size: 2.5vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    // width: 50vw;
+    // height: 10vh;
+    // border-radius: 15px;
+    // background-color: rgb(30, 94, 18);
+  }
+  
+.progress{
+    background: linear-gradient(to left, #F2709C, #FF9472);
+    width: 11vw;
+    height: 20vh;
+    border-radius: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+//     height: 100%;
+//     border-radius: 15px;
+//     animation: progress-animation 10s forwards;
+//     display: flex;
+//     align-items: center;
+//     text-align: center;
+//     justify-content: center;
+//     background: linear-gradient(to left, #F2709C, #FF9472);
+// 	box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
+}
+
+  
+//   @keyframes progress-animation{
+//     0% {width: 0%;}
+//     100% {width: 100%;}
+//   }

@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: auto;
 }
 
 canvas {
-  width: 1000px;
-  height: 800px;
-  display: block;
+  height: 50vh;
+  width: 50vw;
 }
