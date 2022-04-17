@@ -3,3 +3,4 @@ declare module "*.module.css";
 declare module "*.module.scss";
 declare module "*.jpeg";
 declare module "*.png";
+declare module "react-full-page";

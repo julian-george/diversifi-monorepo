@@ -9,6 +9,7 @@ module.exports = {
     "plugin:import/typescript",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -29,7 +30,7 @@ module.exports = {
     "prefer-template": 0,
     "operator-linebreak": 0,
     "nonblock-statement-body-position": 0,
-    curly: ["warn", "multi-line"],
+    curly: 0,
 
     "react/function-component-definition": 0,
     "react/require-default-props": 0,
@@ -38,5 +39,6 @@ module.exports = {
       { extensions: [".js", ".jsx", ".ts", ".tsx"] },
     ],
     "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
   },
 };
