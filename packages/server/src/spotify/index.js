@@ -140,13 +140,14 @@ const getTrackIDsInPlaylist = async (playlistID) => {
  * @param {[string]} trackIds an array of track ids
  * @return {Object} data key contains an a array of audio feature objects, status key contains error code if applicable
  */
-const getTracksAudioFeatures = async (trackIDs, retries=0) => {
-	await refreshHeader();
+const getTracksAudioFeatures = async (userAccessToken, trackIDs, retries=0) => {
 	const api_url = `https://api.spotify.com/v1/audio-features?ids=${Array.from(trackIDs).join(',')}`;
-
+	const header = {
+		"Authorization": userAccessToken,
+	}
 	try {
 		const response = await axios.get(api_url, {
-			headers: currentHeaders
+			headers: header
 		});
 		return {
       status: 200,
