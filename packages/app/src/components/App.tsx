@@ -5,6 +5,7 @@ import MusicSelector from "./MusicSelector";
 // import { FullPage, Slide } from "react-full-page";
 import axios from "axios";
 import { SERVER_URL } from "../constants";
+import SiteLogo from "../assets/sitelogo.png";
 
 const App: React.FC = () => {
   const [country, setCountry] = useState<string | null>(null);
@@ -34,20 +35,25 @@ const App: React.FC = () => {
   );
   console.log(styles);
   return (
-    <div className={styles.appContent}>
-      {/* <FullPage controls controlsProps={{ className: styles.hiddenControls }}>
+    <>
+      <div className={styles.appContent}>
+        <div className={styles.logoContainer}>
+          <img src={SiteLogo} className={styles.siteLogo} />
+        </div>
+        {/* <FullPage controls controlsProps={{ className: styles.hiddenControls }}>
         <Slide className={styles.slide1}> */}
-      <SpotifyAuth
-        authCode={spotifyAuthCode}
-        accessToken={accessToken}
-        setAccessToken={setAccessToken}
-      />
-      {/* </Slide> */}
-      {/* <Slide className={styles.slide2}> */}
-      <MusicSelector country={country} setCountry={setCountry} />
-      {/* </Slide>
+        <SpotifyAuth
+          authCode={spotifyAuthCode}
+          accessToken={accessToken}
+          setAccessToken={setAccessToken}
+        />
+        {/* </Slide> */}
+        {/* <Slide className={styles.slide2}> */}
+        <MusicSelector country={country} setCountry={setCountry} />
+        {/* </Slide>
       </FullPage> */}
-    </div>
+      </div>
+    </>
   );
 };
 export default App;

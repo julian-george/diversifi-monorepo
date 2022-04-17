@@ -3,6 +3,7 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 const env = process.env.NODE_ENV || "development";
 
@@ -96,6 +97,7 @@ module.exports = {
       emitWarning: true,
       failOnError: true,
     }),
+    new FaviconsWebpackPlugin("./src/assets/favicon.png"),
     autoprefixer,
   ],
   devServer: {
