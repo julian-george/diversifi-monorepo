@@ -1,15 +1,10 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import {ClimbingBoxLoader} from "react-spinners";
-import { RedFormat } from "three";
-
-
 
 export interface Props{
     children?: React.ReactChild | React.ReactChild[];
 }
-
-
 
 // let selection = document.querySelector('select');
 // let result = document.querySelector('h2');
@@ -139,6 +134,7 @@ let countries = [
 ];
 
 export default class Dropdown extends React.Component{
+    state:any ={}
     constructor(props: any){
         super(props);
         this.state = {
@@ -159,7 +155,7 @@ export default class Dropdown extends React.Component{
                 <div className={styles.progressComponent}>
                     Personalizing Results
                     <div className={styles.progress}>
-                        <ClimbingBoxLoader size={20} css="position:absolute;" />
+                        <ClimbingBoxLoader size={20} />
                     </div>
                 </div>
             )

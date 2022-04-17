@@ -61,7 +61,7 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
       <div className={styles.authTitle}>First, link your Spotify account</div>
       {authCode || accessToken ? (
         <div className={styles.unlinkContainer}>
-          <AuthButton>Successfully Linked</AuthButton>
+          <AuthButton onClick={() => this.props.onClick()}>Successfully Linked, Click to Continue</AuthButton>
           <div className={styles.unlinkButton} onClick={unlinkAccount}>
             Use a different account
           </div>

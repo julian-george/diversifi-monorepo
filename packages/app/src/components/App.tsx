@@ -10,14 +10,19 @@ const App: React.FC = () => {
     () => new URLSearchParams(window.location.search)?.get("code") || null,
     []
   );
+
+  const changeSlide = () =>{
+    console.log("we get here");
+  }
+
   console.log(styles)
   return (
     <div className={styles.appContent}>
       <FullPage controls controlsProps={{className:styles.hiddenControls}}>
-        <Slide className={styles.slide1} scrolltoSlide={styles.slide3}>
+        <Slide className={styles.slide1} scrolltoSlide={styles.slide3} >
           <SpotifyAuth authCode={spotifyAuthCode} />
         </Slide>
-        <Slide className={styles.slide2}>
+        <Slide className={styles.slide2} data-anchor="#page2" id="page2">
           <MusicSelector />
         </Slide>
       </FullPage>
