@@ -155,7 +155,7 @@ export default class Dropdown extends React.Component{
                 <div className={styles.progressComponent}>
                     Personalizing Results
                     <div className={styles.progress}>
-                        <ClimbingBoxLoader size={20} />
+                        <ClimbingBoxLoader size={20} css=""/>
                     </div>
                 </div>
             )
