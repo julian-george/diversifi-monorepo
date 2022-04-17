@@ -22,12 +22,15 @@ countryRouter.get<{ name: string }, any, {}>('/:name', async (req, res) => {
 	
 
 	// Get top tracks (array of song IDs)
-	const topTracks = await getTopUserTracks(authToken);
-
+	const topTracksRes = await getTopUserTracks(authToken);
 	// Handle edge case
 	if (topTracks.length == 0){
 		// TODO: Handle later
 	}
+	if(topTracksRes.status != 200){
+		res.status(topTracksRes.status).json({error: "Somethig is wrong"})
+	}
+	const topTracks = topTracksRes.data;
 
 	// Gets audio features for <= 100 tracks from user
 	let audioFeaturesRes = await getTracksAudioFeatures(topTracks);
