@@ -28,8 +28,9 @@ const Dropdown: React.FC<DropdownProps> = ({ setCountry }) => {
   );
 
   const submitCountry = useCallback(() => {
-    console.log(selectRef);
-    if (selectRef?.current) {
+    if (!localStorage.hasItem("spotify-access-token"))
+      alert("You must sign in first!");
+    else if (selectRef?.current) {
       setCountry(selectRef.current.value);
       setTrigger(true);
     }
