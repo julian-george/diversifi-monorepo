@@ -9,13 +9,15 @@ interface SpotifyAuthProps {
    * The authcode provided in the URL when Spotify redirects to our site, or null if there is no such code
    */
   authCode: string | null;
+  accessToken: string | null;
+  setAccessToken: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
-  const [accessToken, setAccessToken] = useState<string | null>(
-    localStorage.getItem("spotify-access-token")
-  );
-
+const SpotifyAuth: React.FC<SpotifyAuthProps> = ({
+  authCode,
+  accessToken,
+  setAccessToken,
+}) => {
   // Removes the access token from local storage to allow a different accout to be linked
   const unlinkAccount = useCallback(() => {
     setAccessToken(null);
@@ -34,12 +36,6 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
       });
   }, []);
 
-  // Syncs the React state with the local storage, since React doesn't rerender components when localStorage changes
-  useEffect(() => {
-    if (accessToken) localStorage.setItem("spotify-access-token", accessToken);
-    else localStorage.removeItem("spotify-access-token");
-  }, [accessToken]);
-
   // Takes the auth code provided when Spotify redirects back, and uses that to fetch an access token to be stored in localStorage
   useEffect(() => {
     if (authCode)
@@ -47,6 +43,7 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
         .post(SERVER_URL + "/auth/token", { code: authCode })
         .then((response) => {
           const { accessToken, redirectUrl } = response.data;
+          alert(accessToken);
           if (accessToken) setAccessToken(accessToken);
           if (redirectUrl) window.location.href = redirectUrl;
         })
@@ -54,7 +51,7 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
           console.error("Error when authenticating", err);
           window.location.href = "/";
         });
-  }, [authCode]);
+  }, [authCode, setAccessToken]);
 
   return (
     <div className={styles.authContainer}>

@@ -1,14 +1,17 @@
-import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import Earth from "./Earth";
 import styles from "./styles.module.scss";
 
-const Globe: React.FC = () => (
+interface GlobeProps {
+  country: string | null;
+}
+
+const Globe: React.FC<GlobeProps> = ({ country }) => (
   <div className={styles.earthProject}>
     <Canvas>
       <Suspense fallback={null}>
-        <Earth />
+        <Earth country={country} />
       </Suspense>
     </Canvas>
   </div>
