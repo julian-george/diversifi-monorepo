@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import { SERVER_URL } from "../../constants";

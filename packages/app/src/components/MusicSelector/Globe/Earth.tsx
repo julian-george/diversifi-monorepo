@@ -35,7 +35,7 @@ for (const country of Object.keys(countryJson)) {
 }
 
 // Controls speed of country finding animation. Lower = faster
-const ANIMATION_SPEED = 100;
+const ANIMATION_SPEED = 25;
 
 interface EarthProps {
   country: string | null;
@@ -48,10 +48,6 @@ const Earth: React.FC<EarthProps> = ({ country }) => {
   const [animationStepSize, setAnimationStepSize] = useState<[number, number]>([
     0, 0,
   ]);
-
-  useEffect(() => {
-    if (country) viewCountry(country as Country);
-  }, [country]);
 
   const [colorMap, cloudsMap, specularMap] = useLoader(TextureLoader, [
     EarthDayMap,
@@ -116,8 +112,9 @@ const Earth: React.FC<EarthProps> = ({ country }) => {
   );
 
   useEffect(() => {
-    if (earthRef?.current) viewCountry("Norway");
-  }, [earthRef, viewCountry]);
+    console.log(country);
+    if (country) viewCountry(country as Country);
+  }, [country, viewCountry]);
 
   return (
     <>

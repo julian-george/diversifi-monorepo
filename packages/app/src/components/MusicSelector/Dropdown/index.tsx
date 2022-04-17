@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
-import { ClimbingBoxLoader } from "react-spinners";
 import styles from "./styles.module.scss";
 import { countries } from "../../../constants";
 import AuthButton from "../../SpotifyAuth/AuthButton";
@@ -25,32 +24,16 @@ const Dropdown: React.FC<DropdownProps> = ({ setCountry }) => {
 
   const randomFirstCountry = useMemo(
     () => countries[Math.floor(Math.random() * countries.length)],
-    [countries]
+    []
   );
 
-  const optionMaker = () => {
-    countries.map((country) => <option key={country}>{country}</option>);
-  };
-
   const submitCountry = useCallback(() => {
+    console.log(selectRef);
     if (selectRef?.current) {
       setCountry(selectRef.current.value);
       setTrigger(true);
     }
-  }, [selectRef]);
-
-  const conditionalRender = () => {
-    if (trigger) {
-      return (
-        <div className={styles.progressComponent}>
-          Personalizing Results
-          <div className={styles.progress}>
-            <ClimbingBoxLoader size={20} css="position:absolute;" />
-          </div>
-        </div>
-      );
-    }
-  };
+  }, [selectRef, setCountry, setTrigger]);
 
   return (
     <>
@@ -61,6 +44,7 @@ const Dropdown: React.FC<DropdownProps> = ({ setCountry }) => {
           className={styles.comboBox}
           placeholder="Search here.."
           defaultValue={randomFirstCountry}
+          ref={selectRef}
         >
           {countries.map((key) => (
             <option key={key} value={key}>

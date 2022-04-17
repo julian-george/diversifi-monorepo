@@ -14,17 +14,24 @@ const App: React.FC = () => {
     localStorage.getItem("spotify-access-token")
   );
   const [playlistId, setPlaylistId] = useState<string | null>(null);
+  const [playlistLoading, setPlaylistLoading] = useState<boolean>(false);
   useEffect(() => {
-    if (accessToken && country)
+    if (accessToken && country) {
+      setPlaylistLoading(true);
       axios
         .get(SERVER_URL + `/country/${country}`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((response) => {
+          setPlaylistLoading(false);
           setPlaylistId(response?.data?.playlistID);
         })
-        .catch((err) => {});
-  }, [country]);
+        .catch(() => {
+          setPlaylistLoading(false);
+          alert("Error while loading playlist.");
+        });
+    }
+  }, [country, accessToken]);
   // Syncs the React state with the local storage, since React doesn't rerender components when localStorage changes
   useEffect(() => {
     if (accessToken) localStorage.setItem("spotify-access-token", accessToken);
@@ -50,7 +57,7 @@ const App: React.FC = () => {
       {/* </Slide> */}
       {/* <Slide className={styles.slide2}> */}
       <MusicSelector country={country} setCountry={setCountry} />
-      <Playlist playlistId={playlistId} />
+      <Playlist playlistId={playlistId} loading={playlistLoading} />
       {/* </Slide>
       </FullPage> */}
     </div>
