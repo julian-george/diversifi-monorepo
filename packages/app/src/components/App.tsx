@@ -17,7 +17,9 @@ const App: React.FC = () => {
         .get(SERVER_URL + `/country/${country}`, {
           headers: { Authorization: `Bearer ${accessToken}` },
         })
-        .then((response) => {})
+        .then((response) => {
+          alert(response.data);
+        })
         .catch((err) => {});
   }, [country]);
   // Syncs the React state with the local storage, since React doesn't rerender components when localStorage changes
