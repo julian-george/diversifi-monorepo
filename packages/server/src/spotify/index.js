@@ -179,4 +179,75 @@ const getTopUserTracks = async (userAccessToken, retries=0) => {
 	}
 }
 
-export { getTrackIDsInPlaylist, getTracksAudioFeatures, getTopUserTracks };
+const getUserId = async (userAccessToken, retries=0) => {
+	const header = {
+		"Authorization": userAccessToken,
+	}
+
+	const api_url = `https://api.spotify.com/v1/me`;
+
+	try {
+		const response = await axios.get(api_url, {
+			headers: header
+		});
+		return {
+      status: 200,
+			data: response.data.id,
+    } 
+		
+	
+	} catch (error) {
+    return await onRateLimit(error.response, () => { return getUserId(userAccessToken, retries+1); }, retries );
+	}
+}
+
+const createPlaylist = async (userAccessToken, userId, countryName, retries=0) => {
+	const header = {
+		"Authorization": userAccessToken,
+	}
+
+	const api_url = `https://api.spotify.com/v1/users/${userId}/playlists`;
+
+	try {
+		const response = await axios.post(api_url, {
+			name: `Song you would like from ${countryName}`,
+			description: "Made with <3 by Diversif",
+			public: true
+		}, {
+			headers: header
+		});
+		return {
+      status: 200,
+			data: response.data.id,
+    } 
+		
+	
+	} catch (error) {
+    return await onRateLimit(error.response, () => { return createPlaylist(userAccessToken, userId, countryName, retries+1); }, retries );
+	}
+}
+
+const addSongsToPlaylist = async (userAccessToken, playlistID, songList, retries=0) => {
+	const header = {
+		"Authorization": userAccessToken,
+	}
+	const songUris = songList.map(id => `spotify:track:${id}`).join(',');
+
+	const api_url = `https://api.spotify.com/v1/playlists/${playlistID}/tracks?${songUris}`;
+
+	try {
+		const response = await axios.post(api_url, {}, {
+			headers: header
+		});
+		return {
+      status: 200,
+			data: true,
+    } 
+		
+	
+	} catch (error) {
+    return await onRateLimit(error.response, () => { return addSongsToPlaylist(userAccessToken, playlistID, songList, retries+1); }, retries );
+	}
+}
+
+export { getTrackIDsInPlaylist, getTracksAudioFeatures, getTopUserTracks, getUserId, createPlaylist, addSongsToPlaylist };

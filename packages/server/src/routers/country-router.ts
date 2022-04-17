@@ -4,7 +4,7 @@ import axios from 'axios';
 import { SERVER_ERROR } from '../../errors.js';
 import { makeSerializedKDT deserializeKDT, kNearest } from '../kd/utilities';
 import SongNode from '../kd/song_node.js';
-import { getTrackIDsInPlaylist, getTracksAudioFeatures, getTopUserTracks } from '../spotify/index';
+import { getTrackIDsInPlaylist, getTracksAudioFeatures, getTopUserTracks, getUserId, createPlaylist, addSongsToPlaylist } from '../spotify/index';
 import mongoose from 'mongoose';
 import CountrySchema from '../mongo/models/country';
 import country from '../mongo/models/country';
@@ -60,7 +60,27 @@ countryRouter.get<{ name: string }, any, {}>('/:name', async (req, res) => {
 	// Find 20 nearest neighbors
   let knn = kNearest(tree, 20, avg);
 	
-	// Start making playlist
+	// Get user id (for making playlist)
+	let userIdRes = await getUserId(authToken);
+	if(userIdRes.status != 200){
+		res.status(userIdRes.status).json({error: "Something went wrong"});
+	}
+	let userId = userIdRes.data;
+
+	// Make a new spotify playlist
+	let playlistIdRes = await createPlaylist(authToken, userId, countryName);
+	if(playlistIdRes.status != 200){
+		res.status(playlistIdRes.status).json({error: "Something went wrong"});
+	}
+	let newPlaylistId = playlistIdRes.data;
+
+	// Add songs to new playlist
+	let addedSongRes = await addSongsToPlaylist(authToken, newPlaylistId, knn);
+	if(addedSongRes.status != 200){
+		res.status(addedSongRes.status).json({error: "Something went wrong"});
+	}
+	
+	res.status(200).json({playlistID: newPlaylistId});
 });
 
 export default countryRouter;
