@@ -1,7 +1,7 @@
 import { Router } from "express";
 import dotenv from "dotenv";
 import axios from "axios";
-import { SERVER_ERROR } from "../../errors.js";
+import { SERVER_ERROR } from "../errors.js";
 import { makeSerializedKDT, deserializeKDT, kNearest } from "../kd/utilities";
 import SongNode from "../kd/song_node.js";
 import {
@@ -15,7 +15,7 @@ import {
 import mongoose from "mongoose";
 import CountrySchema from "../mongo/models/country";
 import country from "../mongo/models/country";
-import { SERVER_ERROR } from "../../errors";
+import { SERVER_ERROR } from "../errors";
 
 dotenv.config();
 
