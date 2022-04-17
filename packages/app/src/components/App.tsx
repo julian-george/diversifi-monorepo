@@ -33,7 +33,6 @@ const App: React.FC = () => {
     () => new URLSearchParams(window.location.search)?.get("code") || null,
     []
   );
-  console.log(styles);
   return (
     <>
       <div className={styles.appContent}>
