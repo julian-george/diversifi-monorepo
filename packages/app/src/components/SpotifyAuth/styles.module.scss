@@ -4,8 +4,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  gap: 24px;
+  height: 160px;
+  margin-bottom: 64px;
 }
 .authTitle {
   @extend .sectionTitle;
+}
+.unlinkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.unlinkButton {
+  @extend .interactable;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 100ms;
+  color: lighten(black, 15%);
+  &:hover {
+    color: lighten(black, 40%);
+  }
+  &:active {
+    color: lighten(black, 55%);
+  }
 }

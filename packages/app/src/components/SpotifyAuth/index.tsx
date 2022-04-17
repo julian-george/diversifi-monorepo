@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import { SERVER_URL } from "../../constants";
+import AuthButton from "./AuthButton";
 
 interface SpotifyAuthProps {
   /**
@@ -59,12 +60,14 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({ authCode }) => {
     <div className={styles.authContainer}>
       <div className={styles.authTitle}>First, link your Spotify account</div>
       {authCode || accessToken ? (
-        <>
-          <div>Successfully Linked</div>
-          <div onClick={unlinkAccount}>Use a different account</div>
-        </>
+        <div className={styles.unlinkContainer}>
+          <AuthButton>Successfully Linked</AuthButton>
+          <div className={styles.unlinkButton} onClick={unlinkAccount}>
+            Use a different account
+          </div>
+        </div>
       ) : (
-        <button onClick={getAuthCode}>Link Your Account</button>
+        <AuthButton onClick={getAuthCode}>Connect to Spotify</AuthButton>
       )}
     </div>
   );

@@ -1,0 +1,37 @@
+@import "../../../global.module.scss";
+
+$spotify-green: #1db954;
+
+.buttonContainer {
+  border-radius: 8px;
+  padding: 12px 24px 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  background-color: darken($spotify-green, 20%);
+}
+
+.activeButton {
+  @extend .buttonContainer;
+  cursor: pointer;
+  gap: 12px;
+  background-color: $spotify-green;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 100ms;
+  transition: filter 50ms;
+  &:hover {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  &:active {
+    filter: brightness(0.7);
+  }
+}
+
+.buttonImage {
+  height: 20px;
+  width: 20px;
+}
+
+.buttonText {
+  @extend .interactable;
+  color: white;
+}
