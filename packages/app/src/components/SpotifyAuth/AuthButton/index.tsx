@@ -7,16 +7,14 @@ interface AuthButtonProps {
   children?: ReactNode;
 }
 
-const AuthButton: React.FC<AuthButtonProps> = ({ onClick, children }) => {
-  return (
-    <div
-      onClick={onClick}
-      className={onClick ? styles.activeButton : styles.buttonContainer}
-    >
-      {onClick && <img className={styles.buttonImage} src={SpotifyLogo} />}
-      <span className={styles.buttonText}>{children}</span>
-    </div>
-  );
-};
+const AuthButton: React.FC<AuthButtonProps> = ({ onClick, children }) => (
+  <div
+    onClick={onClick}
+    className={onClick ? styles.activeButton : styles.buttonContainer}
+  >
+    {onClick && <img className={styles.buttonImage} src={SpotifyLogo} />}
+    <span className={styles.buttonText}>{children}</span>
+  </div>
+);
 
 export default AuthButton;
