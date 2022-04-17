@@ -1,5 +1,5 @@
 // Config pulled from https://github.com/julian-george/dep-graph-visualization
-
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
