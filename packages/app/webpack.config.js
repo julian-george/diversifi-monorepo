@@ -83,12 +83,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: "./index.html",
-      filename: "./index.html",
-    }),
-    new HtmlWebpackPlugin({
-      template: "./index.html",
-      filename: "./200.html",
+      favicon: "./src/assets/favicon.png",
     }),
     new ESLintPlugin({
       extensions: ["ts", "tsx"],
@@ -97,7 +92,7 @@ module.exports = {
       emitWarning: true,
       failOnError: true,
     }),
-    new FaviconsWebpackPlugin("./src/assets/favicon.png"),
+    // new FaviconsWebpackPlugin("./src/assets/favicon.png"),
     autoprefixer,
   ],
   devServer: {
