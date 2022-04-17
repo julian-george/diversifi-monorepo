@@ -6,13 +6,14 @@ import Playlist from "./Playlist";
 // import { FullPage, Slide } from "react-full-page";
 import axios from "axios";
 import { SERVER_URL } from "../constants";
+import SiteLogo from "../assets/sitelogo.png";
 
 const App: React.FC = () => {
   const [country, setCountry] = useState<string | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(
     localStorage.getItem("spotify-access-token")
   );
-  const [playlistId, setPlaylistId] = useState<string | null>(null)
+  const [playlistId, setPlaylistId] = useState<string | null>(null);
   useEffect(() => {
     if (accessToken && country)
       axios
@@ -20,11 +21,9 @@ const App: React.FC = () => {
           headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((response) => {
-          setPlaylistId(response?.data?.playlistID)
+          setPlaylistId(response?.data?.playlistID);
         })
-        .catch((err) => {
-
-        });
+        .catch((err) => {});
   }, [country]);
   // Syncs the React state with the local storage, since React doesn't rerender components when localStorage changes
   useEffect(() => {
@@ -36,9 +35,11 @@ const App: React.FC = () => {
     () => new URLSearchParams(window.location.search)?.get("code") || null,
     []
   );
-  console.log(styles);
   return (
     <div className={styles.appContent}>
+      <div className={styles.logoContainer}>
+        <img src={SiteLogo} className={styles.siteLogo} />
+      </div>
       {/* <FullPage controls controlsProps={{ className: styles.hiddenControls }}>
         <Slide className={styles.slide1}> */}
       <SpotifyAuth
@@ -49,14 +50,10 @@ const App: React.FC = () => {
       {/* </Slide> */}
       {/* <Slide className={styles.slide2}> */}
       <MusicSelector country={country} setCountry={setCountry} />
-      {console.log(playlistId)}
-      <Playlist playlistId={playlistId}/>
+      <Playlist playlistId={playlistId} />
       {/* </Slide>
       </FullPage> */}
     </div>
   );
 };
 export default App;
-
-
-

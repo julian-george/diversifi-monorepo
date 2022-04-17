@@ -5,14 +5,21 @@ import SpotifyLogo from "../../../assets/spotify-white.png";
 interface AuthButtonProps {
   onClick?: () => void;
   children?: ReactNode;
+  noLogo?: boolean;
 }
 
-const AuthButton: React.FC<AuthButtonProps> = ({ onClick, children }) => (
+const AuthButton: React.FC<AuthButtonProps> = ({
+  onClick,
+  children,
+  noLogo,
+}) => (
   <div
     onClick={onClick}
     className={onClick ? styles.activeButton : styles.buttonContainer}
   >
-    {onClick && <img className={styles.buttonImage} src={SpotifyLogo} />}
+    {onClick && !noLogo && (
+      <img className={styles.buttonImage} src={SpotifyLogo} />
+    )}
     <span className={styles.buttonText}>{children}</span>
   </div>
 );
