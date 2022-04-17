@@ -3,8 +3,9 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader, Mesh, DoubleSide } from "three";
 import { round } from "mathjs";
 
-import EarthDayMap from "../../../assets/textures/8k_earth-daymap.png";
+import EarthDayMap from "../../../assets/textures/earth_day_borders_map.png";
 import EarthCloudsMap from "../../../assets/textures/8k_earth_clouds.png";
+import SpecularMap from "../../../assets/textures/8k_earth_specular_map.png";
 
 import countryJson from "../../../assets/countries.json";
 
@@ -44,9 +45,10 @@ const Earth: React.FC = () => {
     0, 0,
   ]);
 
-  const [colorMap, cloudsMap] = useLoader(TextureLoader, [
+  const [colorMap, cloudsMap, specularMap] = useLoader(TextureLoader, [
     EarthDayMap,
     EarthCloudsMap,
+    SpecularMap,
   ]);
 
   useFrame(() => {
@@ -127,7 +129,7 @@ const Earth: React.FC = () => {
         <sphereGeometry args={[1.1, 50, 50]} />
         <meshPhongMaterial
           map={cloudsMap}
-          opacity={0.4}
+          opacity={0.2}
           depthWrite={true}
           transparent={true}
           side={DoubleSide}
@@ -135,7 +137,7 @@ const Earth: React.FC = () => {
       </mesh>
       <mesh ref={earthRef} position={[0, 0, 3]}>
         <sphereGeometry args={[1.09, 50, 50]} />
-        <meshPhongMaterial />
+        <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial map={colorMap} />
       </mesh>
     </>
