@@ -17,6 +17,7 @@ const App: React.FC = () => {
   const [playlistLoading, setPlaylistLoading] = useState<boolean>(false);
   useEffect(() => {
     if (accessToken && country) {
+      setPlaylistId(null);
       setPlaylistLoading(true);
       axios
         .get(SERVER_URL + `/country/${country}`, {
