@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-
+const dotenv = require("dotenv");
+dotenv.config();
 const env = process.env.NODE_ENV || "development";
 
 const finalCSSLoader =
@@ -84,6 +85,9 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       favicon: "./src/assets/favicon.png",
+    }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
     }),
     new ESLintPlugin({
       extensions: ["ts", "tsx"],
