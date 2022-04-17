@@ -43,6 +43,7 @@ const SpotifyAuth: React.FC<SpotifyAuthProps> = ({
         .post(SERVER_URL + "/auth/token", { code: authCode })
         .then((response) => {
           const { accessToken, redirectUrl } = response.data;
+          alert(accessToken);
           if (accessToken) setAccessToken(accessToken);
           if (redirectUrl) window.location.href = redirectUrl;
         })

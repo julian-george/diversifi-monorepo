@@ -61,10 +61,10 @@ const refreshHeader = async () => {
  * function that handles rate limit behavior
  * @return {string} auth token
  */
-const onRateLimit = async (response, callback, retries) => {
+const onRateLimit = async (response, callback, retries, name = "") => {
   let delay = process.env.DEFAULT_DELAY;
   if (retries >= process.env.MAX_RETRIES) {
-    console.log("retries exceeded");
+    console.log(`retries exceeded for function ${name}`);
     return {
       status: !response.status ? 500 : response.status,
       data: null,
@@ -117,7 +117,8 @@ const getTrackIDsInPlaylistHelper = async (playlistID, offset, retries = 0) => {
       () => {
         return getTrackIDsInPlaylistHelper(playlistID, offset, retries + 1);
       },
-      retries
+      retries,
+      "getTrackIDsInPlaylistHelper"
     );
   }
 };
@@ -156,10 +157,10 @@ const getTracksAudioFeatures = async (
   trackIDs,
   retries = 0
 ) => {
-  console.log(trackIDs);
-  const api_url = `https://api.spotify.com/v1/audio-features?ids=${Array.from(
-    trackIDs
-  ).join(",")}`;
+  console.log("in", trackIDs);
+  const api_url = `https://api.spotify.com/v1/audio-features?ids=${trackIDs.join(
+    ","
+  )}`;
   const header = {
     Authorization: userAccessToken,
   };
@@ -177,7 +178,8 @@ const getTracksAudioFeatures = async (
       () => {
         return getTracksAudioFeatures(trackIDs, retries + 1);
       },
-      retries
+      retries,
+      "getTracksAudioFeatures"
     );
   }
 };
@@ -203,7 +205,8 @@ const getTopUserTracks = async (userAccessToken, retries = 0) => {
       () => {
         return getTopUserTracks(userAccessToken, retries + 1);
       },
-      retries
+      retries,
+      "getTopUserTracks"
     );
   }
 };
@@ -224,12 +227,14 @@ const getUserId = async (userAccessToken, retries = 0) => {
       data: response.data.id,
     };
   } catch (error) {
+    console.log(error.response, userAccessToken);
     return await onRateLimit(
       error.response,
       () => {
         return getUserId(userAccessToken, retries + 1);
       },
-      retries
+      retries,
+      "getUserId"
     );
   }
 };
@@ -273,7 +278,8 @@ const createPlaylist = async (
           retries + 1
         );
       },
-      retries
+      retries,
+      "createPlaylist"
     );
   }
 };
@@ -288,8 +294,8 @@ const addSongsToPlaylist = async (
     Authorization: userAccessToken,
   };
   const songUris = songList.map((id) => `spotify:track:${id}`).join(",");
-
-  const api_url = `https://api.spotify.com/v1/playlists/${playlistID}/tracks?${songUris}`;
+  console.log(songUris);
+  const api_url = `https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${songUris}`;
 
   try {
     const response = await axios.post(
@@ -304,6 +310,8 @@ const addSongsToPlaylist = async (
       data: true,
     };
   } catch (error) {
+    console.log(playlistID, songUris, songList);
+    console.log(error.response.data);
     return await onRateLimit(
       error.response,
       () => {
@@ -314,7 +322,8 @@ const addSongsToPlaylist = async (
           retries + 1
         );
       },
-      retries
+      retries,
+      "addSongsToPlaylist"
     );
   }
 };
