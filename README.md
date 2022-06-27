@@ -1,2 +1,2 @@
-# diversifi-monorepo
-Repo for the frontend
+# About
+Diversifi was an app created for HackDartmouth 2022. This app extracts data from Spotify and everynoise.com and uses it to populate a k-d tree of popular music for every country in the world based on the song attributes collected by Spotify. Then, users can input their Spotify accounts and a country, and their account is compared to the k-d tree for that country to get a personalized playlist from that country for that user. Made with MongoDB, Nodejs, React, and THREEjs.
